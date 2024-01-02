@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Report">
+    <title>主机报表</title>
+</head>
+
+<body>
+    <article>
+        <div class="header-text">
+            主机报表
+        </div>
+    </article>
+    
+    <article>
+        <div class="content">
+            <h2 class="content-title">1.&nbsp;主机信息</h2>
+            <div>
+               
+                <table class="_table">
+                    <tr>
+                        <th>风险等级</th>
+                        <td>{{total.risk_level}}</td>
+                        <th>服务器数量</th>
+                        <td>{{total.computer}}</td>
+                        <th>漏洞数量</th>
+                        <td>{{total.hole.sum}}</td>
+                    </tr>
+                    <tr>
+                        <th>IP</th>
+                        <td colspan="2">{{total.ip}}</td>
+                        <th>操作系统</th>
+                        <td colspan="2">{{total.os}}</td>
+                    </tr>
+                </table>
+            
+            </div>
+            <br>
+
+            <div class="content">
+                <h2 class="content-title">2.&nbsp;服务信息</h2>
+                <div>
+                    <table class="_table">
+                        <tr><th colspan="4">漏洞数量</th></tr>
+                        <tr>
+                            <th>高危</th>
+                            <th>中危</th>
+                            <th>低危</th>
+                            <th>合计</th>
+                        </tr>
+                        <tr>
+                            <td>{{total.hole.sum}}</td>
+                            <td>{{total.hole.high}}</td>
+                            <td>{{total.hole.medium}}</td>
+                            <td>{{total.hole.low}}</td>
+                        </tr>
+                    </table>
+                </div>
+            <br>
+
+            <div class="content">
+                <h2 class="content-title">3.&nbsp;漏洞详情</h2>
+                <div>
+                    {% for num in hole %}
+                    <table class="_table">
+                        <tr>
+                            <th style="width: 20%;">序号</th>
+                            <th colspan="3">名称</th>
+                        </tr>
+                        <tr>
+                            <td>{{loop.index}}</td>
+                            <td colspan="3">{{num.name}}</td>
+                        </tr>
+                        <tr>
+                            <th>风险等级</th>
+                            <td>{{num.risk}}</td>
+                            <th>CVSS</th>
+                            <td>{{num.severity}}</td>
+                        </tr>
+                        <tr>
+                            <th>描述</th>
+                            <td colspan="3">{{num.summary}}</td>
+                        </tr>
+                        <tr>
+                            <th>解决方案</th>
+                            <td colspan="3">{{num.solution}}</td>
+                        </tr>
+                        <tr>
+                            <th>证据列表</th>
+                            <td colspan="3">{{num.evidence}}</td>
+                        </tr>
+                        <tr>
+                            <th>参考信息列表</th>
+                            <td colspan="3">{{num.cve}}</td>
+                        </tr>
+                    </table>
+                    <br>
+                    {% endfor %}
+                </div>
+            <br>
+        </div>
+    </article>
+</body>
+
+<style>
+    /* 文档名称 */
+    .header-text {
+        font-family: PingFangSC-Medium, PingFang SC;
+        text-align: center;
+        font-size: 50px;
+        font-weight: 900;
+        margin-top: 80px;
+    }
+    /* 标题 */
+    .content-title {
+        font-size: 27px;
+        font-family: PingFangSC-Medium, PingFang SC;
+        font-weight: 900;
+        color: black;
+        padding-left: 20px;
+        margin-bottom: 25px;
+
+    }
+    /* 表格 */
+    table {
+        border: 1px solid black;
+        border-collapse: collapse;
+        width: 100%;
+        /* height: 100px; */
+        text-align: left;
+
+    }
+    th {
+        border: 1px solid black;
+        padding: 15px;
+        background-color: #f4f3f3;
+        color: black;
+
+    }
+    td {
+        border: 1px solid black;
+        padding: 15px;
+    }
+
+
+    
+</style>
+
+</html>
